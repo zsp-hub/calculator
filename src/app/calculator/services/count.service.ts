@@ -7,20 +7,30 @@ export class CountService {
 
   constructor() { }
 
-  private getRank(e:string){
-    switch (e){
-      case '+':
-      case '-':
-        return 0;
-        break;
-      case '*':
-      case '/':
-        return 1;
-        break;
-      case '(':
-      case ')':
-        return -1;
-        break;
+  public getResult(result:string) {
+    let equation:string[];
+    let symbol:string[]=[];
+    let variation:string[]=[];
+    let assist:number[]=[];
+    equation = result.split(' ');
+    this.allocate(equation,symbol,variation);
+    this.calculate(variation,assist);
+    return ''+assist.pop();
+  }
+
+  private allocate(equation:string[],symbol:string[],variation:string[]){
+    while (equation.length!=0){
+      let e = equation.shift();
+      if(e >= '0' && e<= '9'){
+        variation.push(e);
+      }else {
+        this.check(e,symbol,variation);
+      }
+    }
+    while (symbol.length!=0){
+      let s = symbol[symbol.length - 1];
+      variation.push(s);
+      symbol.pop();
     }
   }
 
@@ -51,23 +61,24 @@ export class CountService {
     }
   }
 
-  allocate(equation:string[],symbol:string[],variation:string[]){
-    while (equation.length!=0){
-      let e = equation.shift();
-      if(e >= '0' && e<= '9'){
-        variation.push(e);
-      }else {
-        this.check(e,symbol,variation);
-      }
-    }
-    while (symbol.length!=0){
-      let s = symbol[symbol.length - 1];
-      variation.push(s);
-      symbol.pop();
+  private getRank(e:string){
+    switch (e){
+      case '+':
+      case '-':
+        return 0;
+        break;
+      case '*':
+      case '/':
+        return 1;
+        break;
+      case '(':
+      case ')':
+        return -1;
+        break;
     }
   }
 
-  calculate(variation:string[],assist:number[]){
+  private calculate(variation:string[],assist:number[]){
     while (variation.length!=0){
       let v = variation.shift();
       if(v >= '0' && v <= '9'){
@@ -93,18 +104,5 @@ export class CountService {
       }
     }
   }
-
-  public getResult(result:string) {
-    let equation:string[];
-    let symbol:string[]=[];
-    let variation:string[]=[];
-    let assist:number[]=[];
-    equation = result.split(' ');
-    this.allocate(equation,symbol,variation);
-    this.calculate(variation,assist);
-    return ''+assist.pop();
-  }
-
-
 
 }
