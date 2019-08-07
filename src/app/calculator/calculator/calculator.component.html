@@ -1,9 +1,8 @@
-<p>这是一个计算器</p>
-<div>
+<div class="box">
   <app-calculator-dial [result]="result"></app-calculator-dial>
 </div>
-<div>
-  <app-calculator-keyboard (equationChanges)="input($event)"></app-calculator-keyboard>
+<div class="box">
+  <app-calculator-keyboard (equationChanges)="equation($event)" (eliminateChanges)="eliminate()" (countChanges)="count()"></app-calculator-keyboard>
 </div>
 
 

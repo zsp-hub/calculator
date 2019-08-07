@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CountService} from "../services/count.service";
 
 @Component({
   selector: 'app-calculator',
@@ -7,15 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculatorComponent implements OnInit {
 
-  result:String='';
+  result:string='';
 
-  constructor() { }
+  constructor(
+    private countService:CountService
+  ) { }
 
   ngOnInit() {
   }
 
-  input(equation:String) {
-    this.result=equation;
-    console.log(this.result);
+  equation(equation:string) {
+    this.result=this.result+equation;
   }
+
+  eliminate() {
+    this.result='';
+  }
+
+  count() {
+    this.result=this.countService.getResult(this.result);
+  }
+
 }

@@ -1,5 +1,4 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {CountService} from "../services/count.service";
 
 @Component({
   selector: 'app-calculator-keyboard',
@@ -8,27 +7,25 @@ import {CountService} from "../services/count.service";
 })
 export class CalculatorKeyboardComponent implements OnInit {
 
-  equation:String='';
+  @Output() equationChanges = new EventEmitter<string>();
+  @Output() eliminateChanges = new EventEmitter();
+  @Output() countChanges = new EventEmitter();
 
-  @Output() equationChanges = new EventEmitter<String>();
-
-
-  constructor(
-    private count:CountService
-  ) {}
+  constructor() {}
 
   ngOnInit() {
   }
 
-  input(value:string) {
-    this.equation = this.equation + value;
-    this.equationChanges.emit(this.equation.trim());
+  equation(value:string) {
+    this.equationChanges.emit(value);
   }
 
   eliminate() {
-    this.equation = '';
-    this.equationChanges.emit(this.equation.trim());
+    this.eliminateChanges.emit();
   }
 
+  count() {
+    this.countChanges.emit();
+  }
 
 }

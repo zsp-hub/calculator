@@ -7,7 +7,7 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class CalculatorDialComponent implements OnInit {
 
-  @Input() result:String='';
+  @Input() result:string='';
 
   constructor() { }
 

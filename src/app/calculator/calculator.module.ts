@@ -4,6 +4,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorDialComponent } from './calculator-dial/calculator-dial.component';
 import { CalculatorKeyboardComponent } from './calculator-keyboard/calculator-keyboard.component';
 import {CountService} from "./services/count.service";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -11,7 +12,8 @@ import {CountService} from "./services/count.service";
 @NgModule({
   declarations: [CalculatorComponent, CalculatorDialComponent, CalculatorKeyboardComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [CalculatorComponent],
   providers: [CountService]
