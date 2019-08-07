@@ -7,14 +7,6 @@ export class CountService {
 
   constructor() { }
 
-  private isBracket(e:string){
-    if(e=='(' || e==')'){
-      return true;
-    }else {
-      return false;
-    }
-  }
-
   private getRank(e:string){
     switch (e){
       case '+':
@@ -37,14 +29,12 @@ export class CountService {
       symbol.push(e);
       return;
     }
-
-    if(this.isBracket(e)){
+    if(e=='(' || e==')'){
       if(e=='('){
         symbol.push(e);
       }else {
         while (symbol[symbol.length-1]!='('){
-          let s = symbol[symbol.length-1];
-          variation.push(e);
+          variation.push(symbol[symbol.length-1]);
           symbol.pop();
         }
         symbol.pop();
